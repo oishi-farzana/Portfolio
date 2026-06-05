@@ -1,12 +1,6 @@
-/* ============================================
-   Portfolio — Main JavaScript
-   Smooth scroll, animations, mobile menu
-   ============================================ */
+
 
 document.addEventListener('DOMContentLoaded', () => {
-  // ──────────────────────────────────────────
-  // 1. SCROLL-TRIGGERED REVEAL ANIMATIONS
-  // ──────────────────────────────────────────
   const revealElements = document.querySelectorAll('.reveal');
 
   const revealObserver = new IntersectionObserver(
@@ -25,10 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 
   revealElements.forEach((el) => revealObserver.observe(el));
-
-  // ──────────────────────────────────────────
-  // 2. NAVBAR SCROLL BEHAVIOR
-  // ──────────────────────────────────────────
   const navbar = document.getElementById('navbar');
   let lastScrollY = window.scrollY;
 
@@ -50,11 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   window.addEventListener('scroll', handleNavbarScroll, { passive: true });
-  handleNavbarScroll(); // Initial check
-
-  // ──────────────────────────────────────────
-  // 3. ACTIVE NAV LINK HIGHLIGHTING
-  // ──────────────────────────────────────────
+  handleNavbarScroll();
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a, .footer-nav a');
 
@@ -78,11 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   window.addEventListener('scroll', highlightNavLink, { passive: true });
-  highlightNavLink(); // Initial check
-
-  // ──────────────────────────────────────────
-  // 4. SMOOTH SCROLL FOR ANCHOR LINKS
-  // ──────────────────────────────────────────
+  highlightNavLink();
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', (e) => {
       const targetId = anchor.getAttribute('href');
@@ -98,16 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
           top: targetPos,
           behavior: 'smooth',
         });
-
-        // Close mobile menu if open
         closeMobileMenu();
       }
     });
   });
-
-  // ──────────────────────────────────────────
-  // 5. MOBILE MENU TOGGLE
-  // ──────────────────────────────────────────
   const menuBtn = document.getElementById('navMenuBtn');
   const navLinksEl = document.getElementById('navLinks');
 
@@ -128,17 +104,11 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = 'hidden';
     }
   });
-
-  // Close menu on Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeMobileMenu();
     }
   });
-
-  // ──────────────────────────────────────────
-  // 6. TESTIMONIAL CAROUSEL
-  // ──────────────────────────────────────────
   const slides = document.querySelectorAll('.testimonial-slide');
   const dots = document.querySelectorAll('.testimonial-dot');
   let currentSlide = 0;
@@ -161,8 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const next = (currentSlide + 1) % slides.length;
     showSlide(next);
   };
-
-  // Click on dots to navigate
   dots.forEach((dot) => {
     dot.addEventListener('click', () => {
       const slideIndex = parseInt(dot.getAttribute('data-dot'), 10);
@@ -170,8 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
       resetAutoSlide();
     });
   });
-
-  // Auto-advance every 5 seconds
   const startAutoSlide = () => {
     autoSlideInterval = setInterval(nextSlide, 5000);
   };
@@ -184,10 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (slides.length > 1) {
     startAutoSlide();
   }
-
-  // ──────────────────────────────────────────
-  // 7. STAT COUNTER ANIMATION
-  // ──────────────────────────────────────────
   const statNumbers = document.querySelectorAll('.stat-number');
   let statAnimated = false;
 
@@ -219,8 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     statAnimated = true;
   };
-
-  // Trigger counter animation when stats come into view
   const statsSection = document.querySelector('.about-stats');
   if (statsSection) {
     const statsObserver = new IntersectionObserver(
@@ -236,10 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
     );
     statsObserver.observe(statsSection);
   }
-
-  // ──────────────────────────────────────────
-  // 8. PARALLAX-LIKE SCROLL EFFECT FOR HERO
-  // ──────────────────────────────────────────
   const heroHeading = document.querySelector('.hero-heading');
 
   if (heroHeading) {
