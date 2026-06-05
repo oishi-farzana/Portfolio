@@ -30,13 +30,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // 2. NAVBAR SCROLL BEHAVIOR
   // ──────────────────────────────────────────
   const navbar = document.getElementById('navbar');
+  let lastScrollY = window.scrollY;
 
   const handleNavbarScroll = () => {
-    if (window.scrollY > 50) {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > 50) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
     }
+
+    if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      navbar.classList.add('navbar-hidden');
+    } else {
+      navbar.classList.remove('navbar-hidden');
+    }
+    lastScrollY = currentScrollY;
   };
 
   window.addEventListener('scroll', handleNavbarScroll, { passive: true });
